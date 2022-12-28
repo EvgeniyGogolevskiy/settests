@@ -57,7 +57,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, verbose_name='Вопрос', on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, verbose_name='Вопрос', on_delete=models.CASCADE, related_name='answer')
     text = models.CharField('Текст', max_length=255)
     is_valid = models.BooleanField('Правильность', default=False)
 
