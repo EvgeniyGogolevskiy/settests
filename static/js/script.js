@@ -2,6 +2,7 @@ function radioSelect(node) {
     const quest_id = document.getElementById('quest_id');
     sessionStorage.setItem(quest_id.value, node.value);
     const answerKey = sessionStorage.getItem(quest_id.value);
+    liveSend({'is_valid': answerKey})
 }
 
 
@@ -15,5 +16,3 @@ function buttontConfirm() {
     btn_finish.value = s;
     sessionStorage.clear();
 }
-
-

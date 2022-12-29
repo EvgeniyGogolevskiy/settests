@@ -5,15 +5,30 @@
 {% endblock %}
 
 {% block content %}
+{% load static %}
 <h1>{{ title }}</h1>
+<div class="collapse float-left" id="HideObject">
+    <div class="w-75 alert alert-danger"><p>Для прохождения тестов, пожалуйста авторизуйтесь!</p></div>
+</div>
 <div class="tests">
     {% for nametest in nametests %}
     <div class="test">
         <h3> {{ nametest.title }}</h3>
+        {% if user.is_authenticated %}
         {% for test in nametest.tests %}
-            <a class="spisok" href="/question/{{test.slug}}">{{ test.title }}</a>
+        <a class="spisok" href="/question/{{test.slug}}">{{ test.title }}</a>
         {% endfor %}
+        {% else %}
+        {% for test in nametest.tests %}
+        <a class="spisok" href="#HideObject" data-bs-toggle="collapse" aria-expanded="false" aria-controls="HideObject">{{ test.title }}</a>
+        {% endfor %}
+        {% endif %}
     </div>
     {% endfor %}
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
 {% endblock %}

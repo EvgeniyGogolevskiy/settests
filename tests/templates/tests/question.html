@@ -13,23 +13,30 @@
 {% for quest in page_obj %}
 <h3>{{ quest.text }}</h3>
 <input type="hidden" id="quest_id" value="{{ quest.id }}"><br>
-<br><br>
+<br>
 {% for answer in quest.answer.all %}
 <input type="radio" name="select" id="select {{ forloop.counter }}" value="{{ answer.is_valid }}"
        onclick="radioSelect(this)">
-<label>{{ answer.text }}</label><br><br>
-{% endfor %}
+<label for="select {{ forloop.counter }}">{{ answer.text }}</label><br><br>
 {% endfor %}
 
 <hr><br>
 
 {% if page_obj.has_next %}
-<button class="btn btn-outline-secondary" onclick="window.location.href = '?page={{ page_obj.next_page_number }}';">Следующий вопрос</button>
+<button class="btn btn-outline-secondary" onclick="window.location.href = '?page={{ page_obj.next_page_number }}';">
+    Следующий вопрос
+</button>
 {% else %}
 <form method="GET">
-    <button class="btn btn-secondary" name="btn_test" value="" id="btn_finish" onclick="buttontConfirm()">Завершить тест</button>
+    <button class="btn btn-secondary" name="btn_test" value="" id="btn_finish" onclick="buttontConfirm()">Завершить
+        тест
+    </button>
 </form>
 {% endif %}
+
+{% endfor %}
+
+
 
 
 <script src="{% static 'js/script.js' %}"></script>

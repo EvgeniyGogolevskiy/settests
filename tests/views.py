@@ -1,3 +1,5 @@
+import eel as eel
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.views import generic
 from .models import SetTests, NameTest, Question, Answer
@@ -24,7 +26,6 @@ class QuestionView(generic.ListView):
         resultAnswer = self.request.GET.get("btn_test")
         if resultAnswer:
             data = {'result': calculateAnswer(resultAnswer[:-1])}
-            print(data)
             return render(request, 'tests/finish_test.html', context=data)
         return super().get(request, *args, **kwargs)
 
