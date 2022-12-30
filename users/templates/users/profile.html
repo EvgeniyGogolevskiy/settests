@@ -5,6 +5,20 @@
 {% endblock %}
 
 {% block content %}
-<h1>Кабинет пользователя</h1>
-<p>{{ user.username }}</p>
+<h1>Кабинет пользователя: {{ user.username }}</h1>
+<hr>
+
+
+{% for settest in settests %}
+    <h3>{{ settest }}</h3>
+    {% for user_answer in user_answers %}
+    {% if user_answer.nametest.settest == settest %}
+    <p>{{ user_answer }}</p>
+    {% endif %}
+    {% endfor %}
+    <hr>
+{% endfor %}
+
+
+
 {% endblock %}

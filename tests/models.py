@@ -20,7 +20,7 @@ class SetTests(models.Model):
 
 
 class NameTest(models.Model):
-    settest = models.ForeignKey(SetTests, verbose_name='Тема набора тестов', on_delete=models.CASCADE)
+    settest = models.ForeignKey(SetTests, verbose_name='Тема набора тестов', on_delete=models.CASCADE, related_name='nametest')
     slug = models.SlugField('Ссылка на тест')
     title = models.CharField('Тест', max_length=100)
     description = models.TextField('Описание', blank=True, null=True)
@@ -40,7 +40,7 @@ class NameTest(models.Model):
 
 
 class Question(models.Model):
-    nametest = models.ForeignKey(NameTest, verbose_name='Тест', on_delete=models.CASCADE)
+    nametest = models.ForeignKey(NameTest, verbose_name='Тест', on_delete=models.CASCADE, related_name='question')
     text = models.TextField('Текст')
     order = models.PositiveSmallIntegerField('Order', default=0)
 
@@ -75,3 +75,6 @@ class CountAnswer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     nametest = models.ForeignKey(NameTest, on_delete=models.CASCADE)
     results = models.CharField('Результат', max_length=255)
+
+    def __str__(self):
+        return f'{self.nametest} - {self.results} верных ответа'

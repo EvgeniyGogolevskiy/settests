@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from tests.models import NameTest, CountAnswer, SetTests
 
 
 def reg(request):
@@ -22,4 +23,6 @@ def reg(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    settests = SetTests.objects.all()
+    user_answers = CountAnswer.objects.filter(user=request.user)
+    return render(request, 'users/profile.html', {'settests':settests, 'user_answers': user_answers})

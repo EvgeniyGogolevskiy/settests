@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SetTests, NameTest, Question, Answer
+from .models import SetTests, NameTest, Question, Answer, CountAnswer
 
 
 class NameTestAdmin(admin.ModelAdmin):
@@ -22,3 +22,4 @@ class QuestionAdmin(admin.ModelAdmin):
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(SetTests)
 admin.site.register(NameTest, NameTestAdmin)
+admin.site.register(CountAnswer)
